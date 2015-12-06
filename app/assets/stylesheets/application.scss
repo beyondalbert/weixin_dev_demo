@@ -1,0 +1,73 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.form-signin {
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
+}
+
+.form-signin input {
+	margin: 5px 0px;
+}
+
+.form-signin a {
+	float: right;
+}
+
+.wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -70px;
+}
+
+.push {
+  height: 70px;
+}
+
+.footer {
+  position: relative;
+  height: 70px;
+  background-color: #333333;
+}
+.footer .container {
+  text-align: center;
+  color: #999999;
+  padding: 10px 0px;
+}
+
+.footer-div {
+  padding: 5px 0px;
+}
+
+html, body, .container {
+  height: 100%;
+}
+
+.error-div {
+  text-align: center;
+  font-size: 24px;
+  color: #ff8b5e;
+}
+#errorExplanation {
+  margin-top: 50px;
+}
+.error-back-link a {
+  color: #ff8b5e;
+}

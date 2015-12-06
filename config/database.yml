@@ -1,0 +1,25 @@
+default_mysql: &default_mysql
+  adapter: mysql2
+  host: 127.0.0.1
+  encoding: utf8
+  reconnect: false
+  pool: 5
+  socket: /var/run/mysqld/mysqld.sock
+
+development:
+  <<: *default_mysql
+  database: weixin_demo_dev
+  username: root
+  password: ""
+
+test:
+  <<: *default_mysql
+  database: weixin_demo_test
+  username: root
+  password: ""
+
+production:
+  <<: *default_mysql
+  database: weixin_demo_pro
+  username: root
+  password: 

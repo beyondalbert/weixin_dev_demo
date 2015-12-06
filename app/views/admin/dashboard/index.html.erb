@@ -1,0 +1,100 @@
+<div class="row" style="margin-top: 15px;">
+  <div class="col-md-3" id="acount-nav">
+    <%= render partial: 'nav', locals: {page: 'index'}%>
+  </div>
+  <div class="col-md-9">
+    <% if @weixin_mp %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"></h3>
+        </div>
+        <div class="panel-body">
+          <%= form_tag "/admin/weixin_mps/#{@weixin_mp.id}", method: :put, class: "form-horizontal" do %>
+            <div class="form-group">
+              <label for="address_contacts", class="col-sm-2 control-label">公众号配置URL：</label>
+              <div class="col-sm-7">
+                <%= weixin_engine.weixin_server_url(@weixin_mp.weixin_secret_key) %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address_contacts", class="col-sm-2 control-label">公众号接口配置Token：</label>
+              <div class="col-sm-7">
+                <%= @weixin_mp.weixin_token %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address_contacts", class="col-sm-2 control-label">公众号名字：</label>
+              <div class="col-sm-7">
+                <%= text_field_tag 'weixin_mp[name]', @weixin_mp.name, class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address_contacts", class="col-sm-2 control-label">备注：</label>
+              <div class="col-sm-7">
+                <%= text_field_tag 'weixin_mp[note]', @weixin_mp.note, class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address_contacts", class="col-sm-2 control-label">公众号ID：</label>
+              <div class="col-sm-7">
+                <%= text_field_tag 'weixin_mp[app_id]', @weixin_mp.app_id, class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address_contacts", class="col-sm-2 control-label">公众号秘钥：</label>
+              <div class="col-sm-7">
+                <%= text_field_tag 'weixin_mp[app_secret]', @weixin_mp.app_secret, class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-7">
+                <%= submit_tag '更新', class: "btn btn-orange" %>
+              </div>
+
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"></h3>
+        </div>
+        <div class="panel-body">
+          <%= form_tag '/admin/weixin_mps', method: :post, class: "form-horizontal" do %>
+            <div class="form-group">
+              <label for="address_contacts", class="col-sm-2 control-label">公众号名字：</label>
+              <div class="col-sm-7">
+                <%= text_field_tag 'weixin_mp[name]', '', class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address_contacts", class="col-sm-2 control-label">备注：</label>
+              <div class="col-sm-7">
+                <%= text_field_tag 'weixin_mp[note]', '', class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="address_contacts", class="col-sm-2 control-label">公众号ID：</label>
+              <div class="col-sm-7">
+                <%= text_field_tag 'weixin_mp[app_id]', '', class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address_contacts", class="col-sm-2 control-label">公众号秘钥：</label>
+              <div class="col-sm-7">
+                <%= text_field_tag 'weixin_mp[app_secret]', '', class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-7">
+                <%= submit_tag '创建', class: "btn btn-orange" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

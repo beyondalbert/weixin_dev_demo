@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  weixin_mps_id: 1
+  parent_id: 1
+  key: MyString
+  url: MyString
+  is_show: MyString
+  sort: 1
+
+two:
+  name: MyString
+  weixin_mps_id: 1
+  parent_id: 1
+  key: MyString
+  url: MyString
+  is_show: MyString
+  sort: 1

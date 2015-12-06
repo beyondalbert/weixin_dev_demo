@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>微信公众号开发-<%= @status %></title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= favicon_link_tag 'favicon.png' %>
+    <%= favicon_link_tag 'favicon.png', rel: 'apple-touch-icon', type: 'image/png' %>
+    <meta http-equiv="x-ua-compatible" content="IE=10">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <% if @status == 404 %>
+      <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8" homePageUrl="http://yourzuo.com" homePageName="回到微信公众号开发主页"></script>
+    <% else %>
+      <div class="wrap">
+        <%= render :partial => "layouts/top_nav_menu" %>
+        <div class="container error-div">
+          <% if @message.present? %>
+            <div id="errorExplanation"><%=h @message %></div>
+          <% end %>
+          <div class="error-image">
+            <% if @status == 403 %>
+              <%= image_tag 'http://7xj2dv.com2.z0.glb.qiniucdn.com/403_icon.jpg', class: 'error-icon' %>
+            <% else %>
+              <%= image_tag 'http://7xj2dv.com2.z0.glb.qiniucdn.com/500_icon.jpg', class: 'error-icon' %>
+            <% end %>
+          </div>
+          <div class="error-back-link">
+            <label class="back-home"><a href="/">访问主页</a></label>
+            |
+            <label class="back-previous"><a href="javascript:history.back()">返回上一页</a></label>
+        </div>
+        </div>
+        <div class="push"></div>
+      </div>
+      <%= render :partial => "layouts/footer" %>
+    <% end %>
+    <script type="text/javascript">
+      var errorImageWidth = $('.error-image').width();
+      if (errorImageWidth < 480) {
+        $('.error-icon').width(errorImageWidth);
+      }
+    </script>
+  </body>
+</html>
+
