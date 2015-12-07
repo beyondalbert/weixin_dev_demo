@@ -1,8 +1,8 @@
-class Admin::WeixinMpsController < ApplicationController
+class Admin::WeixinMpsController < AdminController
 
   def create
     @weixin_mp = WeixinMp.new(weixin_mp_params)
-    @weixin_mp.users_id = current_user.id
+    @weixin_mp.user_id = current_user.id
     if @weixin_mp.save
       redirect_to "/admin/dashboard/index", flash: {success: "创建成功！"}
     else

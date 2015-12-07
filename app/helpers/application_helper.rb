@@ -6,16 +6,17 @@ module ApplicationHelper
     flash.each do |k, v|
       info_css = ''
       case k
-      when :alert
+      when "alert"
         info_css = "alert-danger"
-      when :notice
+      when "notice"
         info_css = "alert-info"
-      when :success
+      when "success"
         info_css = "alert-success"
-      when :warning
+      when "warning"
         info_css = "alert-warning"
       end
-      s << content_tag('div', content_tag('button', '&times;'.html_safe, class: "close", 'data-dismiss' => 'alert', 'aria-hidden' => 'true') +  v.html_safe, :class => "alert #{info_css} alert-dismissable", :id => "flash_#{k}")
+
+      s << content_tag('div', content_tag('button', '&times;'.html_safe, class: "close", 'data-dismiss' => 'alert', 'aria-hidden' => 'true') +  v.html_safe, :class => "alert #{info_css} alert-dismissable", :id => "flash_#{k}") if v
     end
     s.html_safe
   end

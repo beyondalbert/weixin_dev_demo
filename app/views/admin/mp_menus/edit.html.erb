@@ -1,0 +1,57 @@
+<div class="row" style="margin-top: 15px;">
+  <div class="col-md-3" id="acount-nav">
+    <%= render partial: 'admin/dashboard/nav', locals: {page: 'mp_menus'}%>
+  </div>
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"></h3>
+      </div>
+      <div class="panel-body">
+        <%= form_tag "/admin/mp_menus/#{@mp_menu.id}", method: :put, class: "form-horizontal" do %>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">菜单名字：</label>
+            <div class="col-sm-7">
+              <%= text_field_tag 'mp_menu[name]', @mp_menu.name, class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">菜单类型：</label>
+            <div class="col-sm-7">
+              <%= select_tag 'mp_menu[menu_type]', options_for_select([["跳转网页", 'view'], ["发送内容", 'click']], @mp_menu.menu_type), class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">菜单值：</label>
+            <div class="col-sm-7">
+              <%= text_field_tag 'mp_menu[value]', @mp_menu.value, class: "form-control", placeholder: "跳转网页请输入完整的网址(带http://)"%>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">父菜单：</label>
+            <div class="col-sm-7">
+              <%= select_tag 'mp_menu[parent_id]', options_from_collection_for_select(@parent_menu, "id", "name", @mp_menu.parent_id), include_blank: true, class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">是否显示：</label>
+            <div class="col-sm-7">
+              <%= check_box_tag 'mp_menu[is_show]', 'true', @mp_menu.is_show ? true : false %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">菜单类型：</label>
+            <div class="col-sm-7">
+              <%= select_tag 'mp_menu[sort]', options_for_select([["第一个", 1], ["第二个", 2], ["第三个", 3], ["第四个", 4], ["第五个", 5]], @mp_menu.sort), class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-7">
+              <%= submit_tag '更新', class: "btn btn-default" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

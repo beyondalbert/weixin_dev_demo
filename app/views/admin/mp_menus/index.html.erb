@@ -1,0 +1,102 @@
+<div class="row" style="margin-top: 15px;">
+  <div class="col-md-3" id="acount-nav">
+    <%= render partial: 'admin/dashboard/nav', locals: {page: 'mp_menus'}%>
+  </div>
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">自定义菜单列表</h3>
+        <%= link_to "生成菜单", 'mp_menus/push_to_remote', class: "btn btn-default", style: "float: right;margin-top: -25px;"%>
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>名字</th>
+              <th>类型</th>
+              <th>菜单值</th>
+              <th>是否显示</th>
+              <th>显示位置</th>
+              <th>父菜单</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @mp_menus.each do |mp_menu| %>
+              <tr>
+                <th scope="row"><%= mp_menu.id %></th>
+                <th scope="row"><%= mp_menu.name %></th>
+                <td><%= mp_menu.menu_type %></td>
+                <td style="word-wrap: break-word;word-break: break-all;width: 300px;"><%= mp_menu.value %></td>
+                <td><%= mp_menu.is_show ? "显示" : "不显示" %></td>
+                <td><%= mp_menu.sort %></td>
+                <td><%= mp_menu.parent_menu ? mp_menu.parent_menu.name : "无" %></td>
+                <td>
+                  <%= link_to("mp_menus/#{mp_menu.id}", method: :delete) do %>
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                  <% end %>
+                  <%= link_to("mp_menus/#{mp_menu.id}/edit") do %>
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"></h3>
+      </div>
+      <div class="panel-body">
+        <%= form_tag '/admin/mp_menus', method: :post, class: "form-horizontal" do %>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">菜单名字：</label>
+            <div class="col-sm-7">
+              <%= text_field_tag 'mp_menu[name]', '', class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">菜单类型：</label>
+            <div class="col-sm-7">
+              <%= select_tag 'mp_menu[menu_type]', options_for_select([["跳转网页", 'view'], ["发送内容", 'click']]), class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">菜单值：</label>
+            <div class="col-sm-7">
+              <%= text_field_tag 'mp_menu[value]', '', class: "form-control", placeholder: "跳转网页请输入完整的网址(带http://)"%>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">父菜单：</label>
+            <div class="col-sm-7">
+              <%= select_tag 'mp_menu[parent_id]', options_from_collection_for_select(@parent_menu, "id", "name"), include_blank: true, class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">是否显示：</label>
+            <div class="col-sm-7">
+              <%= check_box_tag 'mp_menu[is_show]', 'true', true %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">菜单类型：</label>
+            <div class="col-sm-7">
+              <%= select_tag 'mp_menu[sort]', options_for_select([["第一个", 1], ["第二个", 2], ["第三个", 3], ["第四个", 4], ["第五个", 5]]), class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-7">
+              <%= submit_tag '创建', class: "btn btn-default" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get 'dashboard/index'
+    get 'mp_menus/push_to_remote'
     resources :weixin_mps
+    resources :mp_menus
   end
 
   get "login" => "sessions#new", :as => "login"

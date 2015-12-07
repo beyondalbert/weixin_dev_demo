@@ -4,9 +4,9 @@ class CreateMpMenus < ActiveRecord::Migration
       t.string :name
       t.integer :weixin_mp_id
       t.integer :parent_id
-      t.string :key
-      t.string :url
-      t.string :is_show
+      t.string :menu_type
+      t.string :value
+      t.boolean :is_show
       t.integer :sort
 
       t.timestamps
