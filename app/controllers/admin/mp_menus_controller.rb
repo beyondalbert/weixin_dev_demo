@@ -1,4 +1,4 @@
-class Admin::MpMenusController < ApplicationController
+class Admin::MpMenusController < AdminController
   before_filter :find_mp_menu, only: [:edit, :update, :destroy]
   def index
     @mp_menus = current_user.weixin_mp.mp_menus

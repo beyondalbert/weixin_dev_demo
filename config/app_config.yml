@@ -1,0 +1,11 @@
+defaults: &DEFAULTS
+  tuling_key: "03ef191329bc154c0eb1a22600a50908"
+
+development:
+  <<: *DEFAULTS
+
+test:
+  <<: *DEFAULTS
+
+production:
+  <<: *DEFAULTS

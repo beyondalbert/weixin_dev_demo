@@ -11,7 +11,19 @@ WeixinRailsMiddleware::WeixinController.class_eval do
   private
 
     def response_text_message(options={})
-      reply_text_message("Your Message: #{@keyword}")
+      case @keyword
+      when /^(运维绑定-)[a-z]$/
+        p "运维绑定成功"
+        reply_text_message("运维绑定成功")
+      else
+        @tuling = Tuling.new(APP_CONFIG["tuling_key"])
+        result = @tuling.send_msg(@keyword)
+        if result[0] == 'text'
+          reply_text_message(result[1])
+        else
+          reply_news_message(result[1])
+        end
+      end
     end
 
     # <Location_X>23.134521</Location_X>
