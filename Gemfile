@@ -35,7 +35,7 @@ gem 'bootstrap-sass'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 
 gem "typhoeus"
-
+gem "unicorn"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
