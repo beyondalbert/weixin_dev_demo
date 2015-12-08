@@ -1,0 +1,76 @@
+<div class="row" style="margin-top: 15px;">
+  <div class="col-md-3" id="acount-nav">
+    <%= render partial: 'admin/dashboard/nav', locals: {page: 'event_replies'} %>
+  </div>
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">自定义事件</h3>
+      </div>
+      <div class="panel-body">
+        <h4 class="panel-title">关注时的消息默认为事件key为 MP0001 的值</h4>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>名字</th>
+              <th>事件key</th>
+              <th>事件值</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @event_replies.each do |er| %>
+              <tr>
+                <th scope="row"><%= er.id %></th>
+                <th scope="row"><%= er.name %></th>
+                <td><%= er.key %></td>
+                <td style="word-wrap: break-word;word-break: break-all;width: 300px;"><%= er.value %></td>
+                <td>
+                  <%= link_to("event_replies/#{er.id}", method: :delete) do %>
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                  <% end %>
+                  <%= link_to("event_replies/#{er.id}/edit") do %>
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"></h3>
+      </div>
+      <div class="panel-body">
+        <%= form_tag '/admin/event_replies', method: :post, class: "form-horizontal" do %>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">事件名字：</label>
+            <div class="col-sm-7">
+              <%= text_field_tag 'event_reply[name]', '', class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">事件key：</label>
+            <div class="col-sm-7">
+              <%= text_field_tag 'event_reply[key]', '', class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">事件值：</label>
+            <div class="col-sm-7">
+              <%= text_area_tag 'event_reply[value]', '', class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-7">
+              <%= submit_tag '创建', class: "btn btn-default" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

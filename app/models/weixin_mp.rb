@@ -3,6 +3,7 @@ class WeixinMp < ActiveRecord::Base
 
   belongs_to :user
   has_many :mp_menus
+  has_many :event_replies
 
   def root_menus
     MpMenu.where(weixin_mp_id: self.id, parent_id: nil)

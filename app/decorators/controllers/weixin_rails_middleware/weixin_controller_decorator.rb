@@ -12,9 +12,8 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
     def response_text_message(options={})
       case @keyword
-      when /^(运维绑定-)[a-z]$/
-        p "运维绑定成功"
-        reply_text_message("运维绑定成功")
+      when "我的openId"
+        reply_text_message(@weixin_message.FromUserName)
       else
         @tuling = Tuling.new(APP_CONFIG["tuling_key"])
         result = @tuling.send_msg(@keyword)
@@ -86,7 +85,12 @@ WeixinRailsMiddleware::WeixinController.class_eval do
         # 扫描带参数二维码事件: 1. 用户未关注时，进行关注后的事件推送
         return reply_text_message("扫描带参数二维码事件: 1. 用户未关注时，进行关注后的事件推送, keyword: #{@keyword}")
       end
-      reply_text_message("关注公众账号")
+      @event_reply = EventReply.find_by_key('MP0001')
+      if @event_reply
+        reply_text_message(@event_reply.value)
+      else
+        reply_text_message("服务出问题啦，请稍后再试！")
+      end
     end
 
     # 取消关注
@@ -108,12 +112,11 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
     # 点击菜单拉取消息时的事件推送
     def handle_click_event
-      case @keyword
-      when "JY001"
-        reply = "hahaha"
-        reply_text_message(company_info)
+      @event_reply = EventReply.find_by_key(@keyword)
+      if @event_reply
+        reply_text_message(@event_reply.value)
       else
-        reply_text_message("你点击了: #{@keyword}")
+        reply_text_message("服务出问题啦，请稍后再试！")
       end
     end
 

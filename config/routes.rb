@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'mp_menus/push_to_remote'
     resources :weixin_mps
     resources :mp_menus
+    resources :event_replies
   end
 
   get "login" => "sessions#new", :as => "login"
@@ -16,7 +17,6 @@ Rails.application.routes.draw do
   resources :sessions
   resources :users
   resources :password_resets
-  resources :weixin_mps
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
